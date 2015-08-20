@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-//var methodOverride = require('method-override');
 
 var mysql = require('mysql');
 var pool = mysql.createPool({
@@ -11,7 +10,6 @@ var pool = mysql.createPool({
 });
 
 /* GET users listing. */
-//router.use(methodOverride('X-HTTP-Method-Override'));
 
 router.param('artist_id', function (req, res, next, id) {
 	if(!isFinite(+id)){
@@ -66,12 +64,11 @@ router.get('/:artist_id', function (req, res, next) {
 	// });
 });
 
-router.get('/delete/:artist_id', function (req, res, next) {
+router.delete('/:artist_id', function (req, res, next) {
 	pool.getConnection(function (err, connection) {
 		connection.query('DELETE FROM artists WHERE id=?', +req.artist.id, function (err, row){
 			console.log(2);
-			alert("삭제완료");
-			res.redirect('/artists');
+			res.redirect('/');
 			connection.release();
 		});
 	});

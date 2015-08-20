@@ -18,6 +18,7 @@ block content
 								a= artist.name
 							td
 								a= artist.gender
-				a(href="/artists/delete/"+artist.id) 삭제하기
+				form(action='/artists/'+artist.id+'?_method=DELETE' method='post')
+					button(type='submit') 삭제하기
 				br
 				a(href="/") 뒤로가기

@@ -64,7 +64,14 @@ connection.query ...
 
 
 
+GET /users
+POST /users
+GET /users/1
+PUT /users/1
+DELETE /users/1
 
+
+RESTful API 
 
 
 

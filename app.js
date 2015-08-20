@@ -10,6 +10,8 @@ var artists = require('./routes/artists');
 
 var app = express();
 
+var methodOverride = require('method-override');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -21,6 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 app.use('/', routes);
 app.use('/artists', artists);
