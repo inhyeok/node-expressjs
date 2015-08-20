@@ -1,0 +1,84 @@
+
+app.use (req, res, next) ->
+
+
+
+doSomething 1, 2, (error, result) ->
+	if error
+		console.log error
+	else
+		res.send 200, result
+
+
+
+doSomething = (a, b) ->
+	return a+b
+
+doSomething = (a, b, callback) ->
+	if a > 10
+		return callback 'error'
+	callback null, a+b
+
+
+mysql = require 'node-mysql'
+
+m
+
+sum = (a, b) -> a+b
+	
+sum = (a, b) ->
+	new Promise (resolve, reject) ->
+		.....
+		if ....
+			resolve (a+b)
+		else
+			reject 'dsfsdf' 
+
+sum(1,3).value() === 4
+sum(1,3).reason() === 'dsfsdf' 
+
+sum(1,3)
+	.then (result) ->
+		...
+	.catch (err) ->
+		...
+
+
+
+connection.query ...
+	if err
+	connection.query ...
+		if err
+		connection.query ...
+			if err
+
+connection.query ...
+.then 
+	connection.query ...
+.then 
+	connection.query ...
+.then 
+	connection.query ...
+.catch err
+	....
+
+
+
+
+
+
+
+
+
+
+
+
+a = sum(1,3)
+
+a = sum(1,3)
+b = sum(1,3)
+c = sum(1,3)
+
+a.value() + 
+
+a.value() === 4

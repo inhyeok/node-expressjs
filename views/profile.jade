@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	.content
+		.artist_box
+			.artist_list
+				table
+					thead
+						tr
+							td 번호
+							td 이름
+							td 성별
+					tbody
+						tr
+							td
+								a= artist.id
+							td
+								a= artist.name
+							td
+								a= artist.gender
+				a(href="/artists/delete/"+artist.id) 삭제하기
+				br
+				a(href="/") 뒤로가기

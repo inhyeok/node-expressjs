@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	.content
+		.artist_box
+			.artist_list
+				table
+					thead
+						tr
+							td 번호
+							td 이름
+					tbody
+						for artist in artist_list
+							tr
+								td
+									a= artist.id
+								td
+									a(href="/artists/"+artist.id)= artist.name
+				a(href="/artists/new") 추가하기
