@@ -1,24 +1,63 @@
 extends layout
 
 block content
-	.content
-		.artist_box
-			.artist_list
-				table
-					thead
-						tr
-							td 번호
-							td 이름
-							td 성별
-					tbody
-						tr
-							td
-								a= artist.id
-							td
-								a= artist.name
-							td
-								a= artist.gender
-				form(action='/artists/'+artist.id+'?_method=DELETE' method='post')
-					button(type='submit') 삭제하기
-				br
-				a(href="/") 뒤로가기
+  .content
+    .artist_box
+      .artist_list
+        table
+          thead
+            tr
+              td 번호
+              td 이름
+              td 성별
+          tbody
+            tr
+              td
+                a= artist.id
+              td
+                a= artist.name
+              td
+                a= artist.gender
+        form(action='/artists/'+artist.id+'?_method=DELETE' method='post')
+          button(type='submit') 삭제하기
+        br
+        a(href="/") 뒤로가기
+
+        hr
+        #thread
+        form#form
+          input#message(type='text' placeholder='Your message' autofocus)
+
+
+
+  script(src="/socket.io/socket.io.js")
+  script window.ARTIST_ID = #{artist.id};
+  script.
+    jQuery(function(){
+      var socket = io('http://lvh.me:3000');
+      socket.on('pong', function (data) {
+        alert(data);
+        //- socket.emit('my other event', { my: 'data' });
+      });
+      //- socket.emit('ping');
+      var add_line = function (data) {
+        $p = $('<p></p>');
+        $p.html(JSON.stringify(data));
+        $('#thread').append($p);
+      }
+      socket.on('receive message', function (data) {
+        add_line(data);
+      });
+      socket.on('entered', function (data) {
+        add_line({body:'들어왔다!'})
+      });
+
+      $('#form').on('submit',function(){
+        add_line({body:$('#message').val()});
+        socket.emit('send message',{room_id: ARTIST_ID , body:$('#message').val()});
+        $('#message').val('')
+        return false;
+      });
+      socket.emit('enter',{artist_id:ARTIST_ID})
+    });
+

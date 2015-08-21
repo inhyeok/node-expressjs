@@ -21,6 +21,32 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+var io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+  console.log('!!!')
+  socket.on('ping', function (data) {
+    socket.emit('pong', 'HELLO');
+  });
+  socket.on('enter', function (data) {
+    socket.join('room-'+data.artist_id);
+    socket.emit('entered');
+  });
+  socket.on('send message', function (data) {
+    console.log(socket.handshake.query);
+    socket.broadcast.to('room-'+data.room_id).emit('receive message', data);
+  });
+  // socket.on('disconnect', function(data){
+  //   socket.leave();
+  // })
+
+  // socket.join('3층')
+  // socket.to('3층').emit('')
+  // socket.emit('news', { hello: 'world' });
+  // socket.on('my other event', function (data) {
+  //   console.log(data);
+  // });
+});
 /**
  * Listen on provided port, on all network interfaces.
  */
