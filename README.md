@@ -1,14 +1,14 @@
 #This is my *node-expressjs Test*
 ---------
-*npm i
-*bower i
-*npm i sockxet.io
+-npm i
+-bower i
+-npm i sockxet.io
 
-##Create Database**
-*database name = people
-*table name = artists
+##Create Database
+-database name = people
+-table name = artists
 
-##table infomation**
+##table infomation
 >CREATE TABLE `artists` (
 >  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 >  `name` varchar(500) DEFAULT NULL,
